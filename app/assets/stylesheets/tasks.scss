@@ -1,0 +1,23 @@
+// Place all the styles related to the tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+  text-align: center;
+}
+
+.todo-list {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.new_task {
+  margin: 20px;
+}
+
+#task_content{
+  line-height: 3em;
+  text-align: center;
+  font-size: 1.2em;
+}
+
