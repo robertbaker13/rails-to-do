@@ -2,6 +2,12 @@ class TasksController < ApplicationController
   def index
     @task = Task.new
     @tasks = Task.all.sort
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @tasks.to_json }
+    end
+
   end
 
   def create
