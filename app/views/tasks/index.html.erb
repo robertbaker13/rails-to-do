@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>DO ALL THE THINGS</h1>
+    <div>
+        <%= form_for @task, url: create_path do |f| %>
+            <%= f.text_field :content, placeholder: "What needs to be done?", size: 60 %>
+            <% f.submit %>
+        <% end %>
+    </div>
+    <table class="todo-list">
+    <% @tasks.each do |task| %>
+    <tr>
+        <% if task.completed %>
+              <td><strike><%= task.content %></strike></td>
+        <% else %>
+              <td><%= task.content %></td>
+        <% end %>
+        <td><%= button_to "toggle", update_path(task) %></td>
+        <td><%= button_to "delete", destroy_path(task), method: "delete" %></td>
+    </tr>
+    <% end %>
+    </table>
+</div>
