@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+
   root 'sessions#login'
 
-  get "logout" => "sessions#destroy", :as => "logout"
-   get "login" => "sessions#new", :as => "login"
-   post "login" => "sessions#create"
+  get 'logout' => "sessions#destroy", :as => 'logout'
+   get 'login' => "sessions#new", :as => 'login'
+   post 'login' => "sessions#create"
 
   resources :users do
     get '/tasks/index' => "tasks#index", as: 'tasks'
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
     delete '/tasks/:id' => "tasks#destroy", as: 'destroy_task'
   end
 
+  get 'api' => "api#documentation", as: 'api'
+  get 'api/tasks' => "api#tasks", as: 'api_tasks'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
