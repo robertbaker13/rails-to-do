@@ -13,8 +13,13 @@ Rails.application.routes.draw do
     delete '/tasks/:id' => "tasks#destroy", as: 'destroy_task'
   end
 
-  get 'api' => "api#documentation", as: 'api'
-  get 'api/tasks' => "api#tasks", as: 'api_tasks'
+namespace :api, defaults: { format: 'json' } do
+  namespace :v1 do
+    resources :tasks, only: [:index, :create, :update, :destroy]
+  end
+end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
