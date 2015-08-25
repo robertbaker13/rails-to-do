@@ -1,6 +1,7 @@
 module Api
   module V1
     class TasksController < ApplicationController
+      protect_from_forgery with: :null_session
       respond_to :json
 
       def index
@@ -8,15 +9,23 @@ module Api
       end
 
       def create
-        respond_with Task.create(params[:product])
+        task = Task.create(params[:task])
+        p "task: #{task}"
+        if task
+          render json: task
+        else
+          respond_with Task.all
+        end
       end
 
       def update
-        respond_with Task.update(params[:id], params[:products])
+        task = Task.update(current_user.id, params[:task])
+        render json: task
       end
 
       def destroy
-        respond_with Task.destroy(params[:id])
+        Task.destroy(params[:id])
+        respond_with Task.all
       end
     end
   end
