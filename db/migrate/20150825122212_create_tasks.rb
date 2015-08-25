@@ -3,6 +3,7 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.string :content
       t.boolean :completed
+      t.references :user, index: true
 
       t.timestamps null: false
     end

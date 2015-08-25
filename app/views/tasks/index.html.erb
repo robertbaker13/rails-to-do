@@ -1,7 +1,7 @@
 <div class="container">
     <h1>DO ALL THE THINGS</h1>
     <div>
-        <%= form_for @task, url: create_path do |f| %>
+        <%= form_for([@user, @task], url: user_create_task_path, method: "post") do |f| %>
             <%= f.text_field :content, placeholder: "What needs to be done?", size: 60 %>
             <% f.submit %>
         <% end %>
@@ -14,8 +14,8 @@
         <% else %>
               <td><%= task.content %></td>
         <% end %>
-        <td><%= button_to "toggle", update_path(task) %></td>
-        <td><%= button_to "delete", destroy_path(task), method: "delete" %></td>
+        <td><%= button_to "toggle", user_update_task_path(@user, task) %></td>
+        <td><%= button_to "delete", user_destroy_task_path(@user, task), method: "delete" %></td>
     </tr>
     <% end %>
     </table>
