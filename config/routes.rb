@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+
   root 'sessions#login'
 
-  get "logout" => "sessions#destroy", :as => "logout"
-   get "login" => "sessions#new", :as => "login"
-   post "login" => "sessions#create"
+  get 'logout' => "sessions#destroy", :as => 'logout'
+   get 'login' => "sessions#new", :as => 'login'
+   post 'login' => "sessions#create"
 
   resources :users do
     get '/tasks/index' => "tasks#index", as: 'tasks'
@@ -11,6 +12,13 @@ Rails.application.routes.draw do
     post '/tasks/:id' => "tasks#update", as: 'update_task'
     delete '/tasks/:id' => "tasks#destroy", as: 'destroy_task'
   end
+
+namespace :api, defaults: { format: 'json' } do
+  namespace :v1 do
+    resources :tasks, only: [:index, :create, :update, :destroy]
+  end
+end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
